@@ -58,6 +58,7 @@
     <Compile Include="Games\GameState.cs" />
     <Compile Include="Games\Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IGameRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>
   <ItemGroup>
