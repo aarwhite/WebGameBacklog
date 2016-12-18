@@ -1,8 +1,9 @@
 ﻿using System;
+using WebGameBacklog.Shared.Persistence;
 
 namespace WebGameBacklog.Domain.Games
 {
-    public class Game
+    public class Game : Entity
     {
         private Game(CreateGameDto createGameDto)
         {

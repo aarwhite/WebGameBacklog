@@ -7,6 +7,8 @@ namespace WebGameBacklog.Persistence.Mappings
     {
         public GameMap()
         {
+            Table("Game");
+
             Id(x => x.Id)
                 .GeneratedBy.GuidComb();
 
