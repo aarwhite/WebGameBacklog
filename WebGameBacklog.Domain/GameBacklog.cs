@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using WebGameBacklog.Domain.Games;
+using WebGameBacklog.Shared.Persistence;
 
 namespace WebGameBacklog.Domain
 {
-    public class GameBacklog
+    public class GameBacklog : Entity
     {
         private ISet<Game> _games = new HashSet<Game>();
 

@@ -2,7 +2,7 @@
 
 namespace WebGameBacklog.Domain.Repositories
 {
-    public interface IGameRepository : IRepository<Game>
+    public interface IGameBacklogRepository : IRepository<GameBacklog>
     {   
     }
 }
