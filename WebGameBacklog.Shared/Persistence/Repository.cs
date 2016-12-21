@@ -1,10 +1,8 @@
 ﻿using NHibernate;
 using System;
 using System.Collections.Generic;
-using WebGameBacklog.Domain.Repositories;
-using WebGameBacklog.Shared.Persistence;
 
-namespace WebGameBacklog.Persistence.Repositories
+namespace WebGameBacklog.Shared.Persistence
 {
     public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {

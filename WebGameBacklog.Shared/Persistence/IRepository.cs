@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using WebGameBacklog.Shared.Persistence;
 
-namespace WebGameBacklog.Domain.Repositories
+namespace WebGameBacklog.Shared.Persistence
 {
     public interface IRepository<TEntity> where TEntity :Entity
     {
