@@ -110,6 +110,10 @@
       <Project>{bf78f47d-9426-48bc-9bff-5f342cfe0605}</Project>
       <Name>WebGameBacklog.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebGameBacklog.Shared\WebGameBacklog.Shared.csproj">
+      <Project>{636627DC-6E7A-4C63-A8E8-DF4AF5CF7234}</Project>
+      <Name>WebGameBacklog.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebGameBacklog\WebGameBacklog.csproj">
       <Project>{7C9CAF0E-8088-46FF-AD57-25813FA8A569}</Project>
       <Name>WebGameBacklog</Name>

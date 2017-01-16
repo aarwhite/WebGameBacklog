@@ -211,10 +211,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -297,6 +293,10 @@
     <ProjectReference Include="..\WebGameBacklog.Persistence\WebGameBacklog.Persistence.csproj">
       <Project>{8f18c91f-76c7-4f87-9006-98fe2862afef}</Project>
       <Name>WebGameBacklog.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebGameBacklog.Services\WebGameBacklog.Services.csproj">
+      <Project>{575e7b1a-7746-4b8f-8177-b2fa48ba873a}</Project>
+      <Name>WebGameBacklog.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
