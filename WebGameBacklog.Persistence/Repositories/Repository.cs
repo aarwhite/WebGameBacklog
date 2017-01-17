@@ -1,7 +1,7 @@
 ﻿using NHibernate;
 using System;
 using System.Collections.Generic;
-using WebGameBacklog.Domain.Repositories;
+using WebGameBacklog.Shared;
 using WebGameBacklog.Shared.Persistence;
 
 namespace WebGameBacklog.Persistence.Repositories

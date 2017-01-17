@@ -298,6 +298,10 @@
       <Project>{575e7b1a-7746-4b8f-8177-b2fa48ba873a}</Project>
       <Name>WebGameBacklog.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebGameBacklog.Shared\WebGameBacklog.Shared.csproj">
+      <Project>{636627dc-6e7a-4c63-a8e8-df4af5cf7234}</Project>
+      <Name>WebGameBacklog.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

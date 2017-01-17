@@ -1,4 +1,4 @@
-﻿using WebGameBacklog.Domain.Games;
+﻿using WebGameBacklog.Shared;
 
 namespace WebGameBacklog.Domain.Repositories
 {

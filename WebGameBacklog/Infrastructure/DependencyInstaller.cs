@@ -2,18 +2,16 @@
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using WebGameBacklog.Persistence.Mappings;
-using WebGameBacklog.Services;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using System.Web.Mvc;
+using WebGameBacklog.Shared.Persistence;
+using WebGameBacklog.Services.Games;
+using WebGameBacklog.Persistence.Repositories;
+using Castle.Core;
 
 namespace WebGameBacklog.Infrastructure
 {
@@ -21,34 +19,33 @@ namespace WebGameBacklog.Infrastructure
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            container.Kernel.ComponentRegistered += Kernel_ComponentRegistered;
+
             //Register all controllers
             container.Register(
 
-                //Nhibernate session factory
-                Component.For<ISessionFactory>().UsingFactoryMethod(CreateNhSessionFactory).LifeStyle.Singleton,
-                
+            //Nhibernate session factory
+            Component.For<ISessionFactory>().UsingFactoryMethod(CreateNhSessionFactory).LifeStyle.Singleton,
+
+                Component.For<NhUnitOfWorkInterceptor>().LifeStyle.Transient,
+
                 //All repoistories
-                Classes.FromAssembly(Assembly.GetAssembly(typeof(Persistence.Repositories.GameBacklogRepository)))
-                    .InSameNamespaceAs<Persistence.Repositories.GameBacklogRepository>()
+                Classes.FromAssembly(Assembly.GetAssembly(typeof(GameBacklogRepository)))
+                    .InSameNamespaceAs<GameBacklogRepository>()
                     .WithService.DefaultInterfaces()
                     .LifestyleTransient(),
 
                 //All services
-                Classes.FromAssembly(Assembly.GetAssembly(typeof(Services.Games.GameBacklogService)))
-                    .InSameNamespaceAs<Services.Games.GameBacklogService>()
+                Classes.FromAssembly(Assembly.GetAssembly(typeof(GameBacklogService)))
+                    .InSameNamespaceAs<GameBacklogService>()
                     .WithService.DefaultInterfaces()
                     .LifestyleTransient(),
 
                 //All MVC controllers
                 Classes.FromThisAssembly().BasedOn<IController>().LifestyleTransient()
-
                 );
         }
 
-        /// <summary>
-        /// Creates NHibernate Session Factory.
-        /// </summary>
-        /// <returns>NHibernate Session Factory</returns>
         private static ISessionFactory CreateNhSessionFactory()
         {
             var connStr = ConfigurationManager.ConnectionStrings["PhoneBook"].ConnectionString;
@@ -56,6 +53,23 @@ namespace WebGameBacklog.Infrastructure
                 .Database(MsSqlConfiguration.MsSql2008.ConnectionString(connStr))
                 .Mappings(m => m.FluentMappings.AddFromAssembly(Assembly.GetAssembly(typeof(GameMap))))
                 .BuildSessionFactory();
+        }
+
+        void Kernel_ComponentRegistered(string key, Castle.MicroKernel.IHandler handler)
+        {
+            if (UnitOfWorkHelper.IsRepositoryClass(handler.ComponentModel.Implementation))
+            {
+                handler.ComponentModel.Interceptors.Add(new InterceptorReference(typeof(NhUnitOfWorkInterceptor)));
+            }
+
+            foreach (var method in handler.ComponentModel.Implementation.GetMethods())
+            {
+                if (UnitOfWorkHelper.HasUnitOfWorkAttribute(method))
+                {
+                    handler.ComponentModel.Interceptors.Add(new InterceptorReference(typeof(NhUnitOfWorkInterceptor)));
+                    return;
+                }
+            }
         }
     }
 }
