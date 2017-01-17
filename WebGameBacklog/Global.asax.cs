@@ -45,7 +45,7 @@ namespace WebGameBacklog
         private void InitializeWindsor()
         {
             _windsorContainer = new WindsorContainer();
-            _windsorContainer.Install(FromAssembly.This());
+            _windsorContainer.Install(new DependencyInstaller());
 
             ControllerBuilder.Current.SetControllerFactory(
                 new WindsorControllerFactory(_windsorContainer.Kernel));

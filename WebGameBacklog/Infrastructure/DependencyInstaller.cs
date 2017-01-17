@@ -48,7 +48,7 @@ namespace WebGameBacklog.Infrastructure
 
         private static ISessionFactory CreateNhSessionFactory()
         {
-            var connStr = ConfigurationManager.ConnectionStrings["PhoneBook"].ConnectionString;
+            var connStr = ConfigurationManager.ConnectionStrings["GameBacklog"].ConnectionString;
             return Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2008.ConnectionString(connStr))
                 .Mappings(m => m.FluentMappings.AddFromAssembly(Assembly.GetAssembly(typeof(GameMap))))
