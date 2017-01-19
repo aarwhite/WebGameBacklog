@@ -2,15 +2,9 @@
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using WebGameBacklog.Persistence.Mappings;
-using WebGameBacklog.Services;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using System.Web.Mvc;
@@ -45,13 +39,9 @@ namespace WebGameBacklog.Infrastructure
                 );
         }
 
-        /// <summary>
-        /// Creates NHibernate Session Factory.
-        /// </summary>
-        /// <returns>NHibernate Session Factory</returns>
         private static ISessionFactory CreateNhSessionFactory()
         {
-            var connStr = ConfigurationManager.ConnectionStrings["PhoneBook"].ConnectionString;
+            var connStr = ConfigurationManager.ConnectionStrings["GameBacklog"].ConnectionString;
             return Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2008.ConnectionString(connStr))
                 .Mappings(m => m.FluentMappings.AddFromAssembly(Assembly.GetAssembly(typeof(GameMap))))
